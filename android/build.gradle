@@ -1,0 +1,37 @@
+buildscript {
+    repositories {
+        google()
+        //mavenLocal()fx]
+        mavenCentral()
+        jcenter()
+        maven { url "https://jitpack.io" }
+        //maven { url "https://plugins.gradle.org/m2/" }
+    }
+
+
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
+
+
+
+}
+
+rootProject.buildDir = '../build'
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
+    project.evaluationDependsOn(':app')
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}
+
